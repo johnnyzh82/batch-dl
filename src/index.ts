@@ -100,7 +100,7 @@ function downloadMp4(options: { id: string, title: string, filter: string, forMp
         const filePath = path.join(folderPath, `${sanitizeTitle}.mp4`);
         log.info(`${sanitizeTitle} - Start downloading ${options.id}`);
         fs.ensureDir(folderPath, () => {
-            const videoObject = ytdl(options.id, { filter: options.filter });
+            const videoObject = ytdl(options.id, { filter: options.filter, quality: "highest" });
             videoObject.pipe(fs.createWriteStream(filePath)).on("finish", () => {
                 log.info(`${sanitizeTitle} - Download finished on ${folderPath}.`);
                 const info: Mp4VideoInfo = { filePath, folderPath, title: `${sanitizeTitle}.mp3` };
