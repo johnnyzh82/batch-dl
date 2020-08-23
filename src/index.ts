@@ -70,7 +70,7 @@ async function downloadAllMp4() {
         const id = getVideoId(url);
         if (id) {
             const info = await ytdl.getInfo(id);
-            downloadMp4({ id, title: info.title, filter: "audioandvideo", forMp4: true });
+            downloadMp4({ id, title: info.videoDetails.title, filter: "audioandvideo", forMp4: true });
         } else {
             log.error(`The url (${url}) is not in valid format.`);
         }
