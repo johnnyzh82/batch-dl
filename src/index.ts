@@ -34,7 +34,7 @@ function getVideoId(url: string): string {
 }
 
 function sanitizeFileName(name: string): string {
-    return name.replace(/[^a-z0-9]/gi, "");
+    return name.replace(/[^\w\s]/gi, "");
 }
 
 function loadVideoUrls(videoType: VideoType): Promise<string[]> {
