@@ -4,8 +4,7 @@
   "description": "Batch download youtube videos",
   "main": "./src/index.js",
   "scripts": {
-    "build": ".\\node_modules\\.bin\\tsc -p tsconfig.json",
-    "start": "npm i --no-optional & npm run build & node .\\dist\\index.js"
+    "start": "npm i --no-optional & ts-node src/index.ts"
   },
   "author": "",
   "license": "MIT",
@@ -19,6 +18,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "fs-extra": "^8.1.0",
     "log4js": "^5.2.2",
-    "ytdl-core": "^3.4.2"
+    "ts-node": "^9.1.1",
+    "ytdl-core": "^4.8.2"
   }
 }

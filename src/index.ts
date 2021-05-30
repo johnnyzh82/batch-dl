@@ -34,7 +34,7 @@ function getVideoId(url: string): string {
 }
 
 function sanitizeFileName(name: string): string {
-    return name.replace(/[^\w\s]/gi, "");
+    return name.replace(/[^\w\s!@#\$%\^\&*\)\(+=._-]+]/gi, "");
 }
 
 function loadVideoUrls(videoType: VideoType): Promise<string[]> {
@@ -87,7 +87,7 @@ async function downloadAllMp3() {
         const id = getVideoId(url);
         if (id) {
             const info = await ytdl.getInfo(id);
-            const file = await downloadMp4({ id, title: info.title, filter: "audioonly", forMp4: false });
+            const file = await downloadMp4({ id, title: info.videoDetails.title, filter: "audioonly", forMp4: false });
             await convertMp4ToMp3(file);
         }
     }
@@ -140,9 +140,13 @@ function cleanUp() {
 }
 
 async function init() {
-    await downloadAllMp4();
-    await downloadAllMp3();
-    cleanUp();
+    try {
+        await downloadAllMp4();
+        await downloadAllMp3();
+        cleanUp();
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 init();
